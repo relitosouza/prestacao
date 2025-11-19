@@ -213,6 +213,3 @@ Abra uma *issue* contendo:
 
 Se este repositório foi útil para você, não esqueça de deixar uma **estrela**! ⭐
 
----
-
-Se quiser, posso também gerar a **versão com badges**, **preview de imagens**, ou **template com sumário automático**.
