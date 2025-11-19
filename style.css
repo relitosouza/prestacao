@@ -1,0 +1,175 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #333;
+}
+.container { display: flex; min-height: 100vh; }
+
+/* --- 1. Menu Lateral --- */
+.sidebar {
+    width: 260px;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    flex-shrink: 0; 
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    /* Divide o menu em duas seções: a lista e a barra inferior */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.sidebar-menu { 
+    list-style: none; 
+    padding: 20px 0 0 0; /* Adiciona padding no topo */
+    margin: 0; 
+    overflow-y: auto; /* Permite rolar apenas a lista de links */
+}
+.sidebar-menu a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+}
+.sidebar-menu a:hover { background-color: #f7f7f7; }
+.sidebar-menu a.active {
+    color: #007BFF;
+    font-weight: 600;
+    background-color: #f0f5ff;
+    border-left: 3px solid #007BFF;
+}
+.sidebar-menu li { 
+    margin-top: 5px; 
+} 
+
+/* --- 2. Área de Conteúdo --- */
+.content-wrapper { flex-grow: 1; display: flex; flex-direction: column; }
+.content-area { padding: 30px; flex-grow: 1; overflow-y: auto; }
+.content-page { display: none; }
+.content-page.active { display: block; }
+
+/* --- 3. Botões de Geração --- */
+.btn-generate-page {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+.btn-generate-page:hover { background-color: #218838; }
+
+/* Botão Mestre (NOVO!) */
+.footer-bar {
+    background: #f9f9f9;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.03);
+}
+.btn-submit-master {
+    background-color: #0056b3; /* Azul mais escuro */
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+.btn-submit-master:hover { background-color: #004085; }
+
+
+/* --- 4. Estilos do Formulário --- */
+fieldset {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fafafa;
+}
+fieldset fieldset {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+}
+legend { 
+    font-weight: 600; 
+    font-size: 1.1em; 
+    color: #333; 
+    padding: 0 10px;
+}
+form div { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; font-weight: 500; }
+input[type="text"], input[type="number"], input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.form-row { display: flex; gap: 20px; }
+.form-row > div { flex: 1; }
+
+/* --- 5. Estilos para Listas Dinâmicas --- */
+.btn-add {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-remove {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.list-container { margin-top: 20px; }
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    flex-wrap: wrap; 
+}
+.list-item span { max-width: 80%; }
+
+.mini-form {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.staging-list-container {
+     margin-top: 15px;
+     padding-top: 15px;
+     border-top: 1px dashed #ccc;
+}
+.list-item-remuneracao { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    padding: 8px;
+    background: #f4f4f4;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}

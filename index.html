@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador e Validador de JSON</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.12.0/ajv.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        
+        <nav class="sidebar">
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#" id="nav-geral" class="active" onclick="openPage(event, 'page-geral')">
+                        1. Descritor e ajuste
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-empregados" onclick="openPage(event, 'page-empregados')">
+                        2. Relação de Empregados...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-bens" onclick="openPage(event, 'page-bens')">
+                        3. Relação de Bens...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-contratos" onclick="openPage(event, 'page-contratos')">
+                        4. Contratos
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-docfiscais" onclick="openPage(event, 'page-docfiscais')">
+                        5. Documentos Fiscais
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-pagamentos" onclick="openPage(event, 'page-pagamentos')">
+                        6. Pagamentos
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-disponibilidades" onclick="openPage(event, 'page-disponibilidades')">
+                        7. Disponibilidades
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-receitas" onclick="openPage(event, 'page-receitas')">
+                        8. Receitas
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-ajustes" onclick="openPage(event, 'page-ajustes')">
+                        9. Ajustes de Saldo
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-servidores" onclick="openPage(event, 'page-servidores')">
+                        10. Relação de Servidores...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-descontos" onclick="openPage(event, 'page-descontos')">
+                        11. Descontos
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-devolucoes" onclick="openPage(event, 'page-devolucoes')">
+                        12. Devoluções
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-glosas" onclick="openPage(event, 'page-glosas')">
+                        13. Glosas
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-empenhos" onclick="openPage(event, 'page-empenhos')">
+                        14. Empenhos
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-repasses" onclick="openPage(event, 'page-repasses')">
+                        15. Repasses
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-rel-atividades" onclick="openPage(event, 'page-rel-atividades')">
+                        16. Relatórios de Atividades
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-dados-gerais-entidade" onclick="openPage(event, 'page-dados-gerais-entidade')">
+                        17. Dados Gerais da Entidade...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-responsaveis" onclick="openPage(event, 'page-responsaveis')">
+                        18. Responsáveis e Membros
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-pub-regulamento" onclick="openPage(event, 'page-pub-regulamento')">
+                        19. Publicação do Regulamento...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-pub-extrato" onclick="openPage(event, 'page-pub-extrato')">
+                        20. Publicação do Extrato...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-declaracoes" onclick="openPage(event, 'page-declaracoes')">
+                        21. Declarações
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-rel-comissao" onclick="openPage(event, 'page-rel-comissao')">
+                        22. Rel. de Comissão de Avaliação
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-rel-governamental" onclick="openPage(event, 'page-rel-governamental')">
+                        23. Rel. Governamental da Análise...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-rel-monitoramento" onclick="openPage(event, 'page-rel-monitoramento')">
+                        24. Rel. de Monitoramento...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-demonstracoes" onclick="openPage(event, 'page-demonstracoes')">
+                        25. Demonstrações Contábeis
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-pub-parecer" onclick="openPage(event, 'page-pub-parecer')">
+                        26. Publicações de Parecer ou Ata
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-pub-rel-atividades" onclick="openPage(event, 'page-pub-rel-atividades')">
+                        27. Publicação do Relatório...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-prestacao-contas" onclick="openPage(event, 'page-prestacao-contas')">
+                        28. Prestação de Contas da Entidade...
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-parecer" onclick="openPage(event, 'page-parecer')">
+                        29. Parecer Conclusivo
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="nav-transparencia" onclick="openPage(event, 'page-transparencia')">
+                        30. Transparência
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="footer-bar">
+                <button type="button" class="btn-submit-master" onclick="gerarJsonCompleto()">
+                    Gerar e Validar JSON Completo
+                </button>
+            </div>
+        </nav>
+
+        <div class="content-wrapper">
+            <main class="content-area">
+
+                <div id="page-geral" class="content-page active">
+                    <h2>1. Descritor e Ajuste</h2>
+                    <fieldset>
+                        <legend>Descritor</legend>
+                        <div>
+                            <label for="tipo_documento">Tipo de Documento:</label>
+                            <input type="text" id="tipo_documento" value="Prestação de Contas de Contrato de Gestão">
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="municipio">Município (Código):</label>
+                                <input type="number" id="municipio" value="7107">
+                            </div>
+                            <div>
+                                <label for="entidade">Entidade (Código):</label>
+                                <input type="number" id="entidade" value="10048">
+                            </div>
+                            <div>
+                                <label for="ano">Ano:</label>
+                                <input type="number" id="ano" value="2024">
+                            </div>
+                            <div>
+                                <label for="mes">Mês:</label>
+                                <input type="number" id="mes" value="12">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Ajuste</legend>
+                        <div>
+                            <label for="codigo_ajuste">Código de Ajuste:</label>
+                            <input type="text" id="codigo_ajuste" value="2024000000000001">
+                        </div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonGeral()">
+                        Gerar JSON (Descritor e Ajuste)
+                    </button>
+                </div>
+
+                <div id="page-empregados" class="content-page">
+                    <h2>2. Relação de Empregados da Entidade Beneficiária</h2>
+                    <fieldset>
+                        <legend>Adicionar Novo Empregado</legend>
+                        <div>
+                            <label for="emp-cpf">CPF:</label>
+                            <input type="text" id="emp-cpf" placeholder="00000000191">
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="emp-data-admissao">Data Admissão:</label>
+                                <input type="date" id="emp-data-admissao">
+                            </div>
+                            <div>
+                                <label for="emp-data-demissao">Data Demissão (Opcional):</label>
+                                <input type="date" id="emp-data-demissao">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                             <div>
+                                <label for="emp-cbo">CBO:</label>
+                                <input type="text" id="emp-cbo" placeholder="123456">
+                            </div>
+                             <div>
+                                <label for="emp-cns">CNS:</label>
+                                <input type="text" id="emp-cns" placeholder="123456789012345">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="emp-salario-contratual">Salário Contratual:</label>
+                            <input type="number" id="emp-salario-contratual" placeholder="1320.00" step="0.01">
+                        </div>
+                        <div class="mini-form">
+                            <legend>Períodos de Remuneração</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="rem-mes">Mês:</label>
+                                    <input type="number" id="rem-mes" placeholder="1" min="1" max="12">
+                                </div>
+                                <div>
+                                    <label for="rem-carga">Carga Horária:</label>
+                                    <input type="number" id="rem-carga" placeholder="160.0" step="0.1">
+                                </div>
+                                <div>
+                                    <label for="rem-bruta">Remuneração Bruta:</label>
+                                    <input type="number" id="rem-bruta" placeholder="1320.00" step="0.01">
+                                </div>
+                            </div>
+                            <button type="button" class="btn-add" style="font-size: 0.9em; padding: 8px 12px;" onclick="addPeriodoRemuneracao()">
+                                + Adicionar Período
+                            </button>
+                            <div id="staging-periodos-list" class="staging-list-container"></div>
+                        </div>
+                        <button type="button" class="btn-add" style="width: 100%; margin-top: 20px;" onclick="salvarEmpregado()">
+                            Salvar Empregado na Lista
+                        </button>
+                    </fieldset>
+                    <h3>Empregados Adicionados</h3>
+                    <div id="lista-empregados" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonEmpregados()">
+                        Gerar JSON (Relação de Empregados)
+                    </button>
+                </div>
+                
+                <div id="page-bens" class="content-page">
+                    <h2>3. Relação de Bens da Entidade Beneficiária</h2>
+                    <fieldset>
+                        <legend>Bens Móveis Adquiridos</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="bma-patrimonio">Nº Patrimônio:</label>
+                                <input type="text" id="bma-patrimonio" placeholder="123">
+                            </div>
+                            <div>
+                                <label for="bma-data">Data Aquisição:</label>
+                                <input type="date" id="bma-data">
+                            </div>
+                            <div>
+                                <label for="bma-valor">Valor Aquisição:</label>
+                                <input type="number" id="bma-valor" placeholder="100.00" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="bma-descricao">Descrição:</label>
+                            <input type="text" id="bma-descricao" placeholder="Descrição do bem">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addBemMovelAdquirido()">+ Adicionar Móvel Adquirido</button>
+                        <div id="lista-bens-moveis-adquiridos" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Bens Móveis Cedidos</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="bmc-patrimonio">Nº Patrimônio:</label>
+                                <input type="text" id="bmc-patrimonio" placeholder="123">
+                            </div>
+                            <div>
+                                <label for="bmc-data">Data Cessão:</label>
+                                <input type="date" id="bmc-data">
+                            </div>
+                            <div>
+                                <label for="bmc-valor">Valor Cessão:</label>
+                                <input type="number" id="bmc-valor" placeholder="100.00" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="bmc-descricao">Descrição:</label>
+                            <input type="text" id="bmc-descricao" placeholder="Descrição do bem">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addBemMovelCedido()">+ Adicionar Móvel Cedido</button>
+                        <div id="lista-bens-moveis-cedidos" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Bens Móveis Baixados/Devolvidos</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="bmb-patrimonio">Nº Patrimônio:</label>
+                                <input type="text" id="bmb-patrimonio" placeholder="123">
+                            </div>
+                            <div>
+                                <label for="bmb-data">Data Baixa/Devolução:</label>
+                                <input type="date" id="bmb-data">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addBemMovelBaixado()">+ Adicionar Móvel Baixado</button>
+                        <div id="lista-bens-moveis-baixados" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Bens Imóveis Adquiridos</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="bia-descricao">Descrição:</label>
+                                <input type="text" id="bia-descricao" placeholder="Descrição do bem imóvel">
+                            </div>
+                            <div>
+                                <label for="bia-data">Data Aquisição:</label>
+                                <input type="date" id="bia-data">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addBemImovelAdquirido()">+ Adicionar Imóvel Adquirido</button>
+                        <div id="lista-bens-imoveis-adquiridos" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Bens Imóveis Cedidos</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="bic-descricao">Descrição:</label>
+                                <input type="text" id="bic-descricao" placeholder="Descrição do bem imóvel">
+                            </div>
+                            <div>
+                                <label for="bic-data">Data Cessão:</label>
+                                <input type="date" id="bic-data">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addBemImovelCedido()">+ Adicionar Imóvel Cedido</button>
+                        <div id="lista-bens-imoveis-cedidos" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Bens Imóveis Baixados/Devolvidos</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="bib-descricao">Descrição:</label>
+                                <input type="text" id="bib-descricao" placeholder="Descrição do bem imóvel">
+                            </div>
+                            <div>
+                                <label for="bib-data">Data Baixa/Devolução:</label>
+                                <input type="date" id="bib-data">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addBemImovelBaixado()">+ Adicionar Imóvel Baixado</button>
+                        <div id="lista-bens-imoveis-baixados" class="list-container"></div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonBens()">
+                        Gerar JSON (Relação de Bens)
+                    </button>
+                </div>
+
+                <div id="page-contratos" class="content-page">
+                    <h2>4. Contratos</h2>
+                    <fieldset>
+                        <legend>Adicionar Novo Contrato</legend>
+                        <div>
+                            <label for="contrato-numero">Número do Contrato:</label>
+                            <input type="text" id="contrato-numero" placeholder="1234657890">
+                        </div>
+                        <fieldset>
+                            <legend>Dados do Credor</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="contrato-credor-tipo">Tipo Documento:</label>
+                                    <input type="number" id="contrato-credor-tipo" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="contrato-credor-numero">Número Documento:</label>
+                                    <input type="text" id="contrato-credor-numero" placeholder="00000000191">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="contrato-credor-nome">Nome/Razão Social:</label>
+                                <input type="text" id="contrato-credor-nome" placeholder="Nome/Razão Social do Credor">
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Vigência</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="contrato-data-assinatura">Data Assinatura:</label>
+                                    <input type="date" id="contrato-data-assinatura">
+                                </div>
+                                <div>
+                                    <label for="contrato-vigencia-tipo">Tipo Vigência:</label>
+                                    <input type="number" id="contrato-vigencia-tipo" placeholder="1">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="contrato-vigencia-inicio">Vigência (Início):</label>
+                                    <input type="date" id="contrato-vigencia-inicio">
+                                </div>
+                                <div>
+                                    <label for="contrato-vigencia-final">Vigência (Final):</label>
+                                    <input type="date" id="contrato-vigencia-final">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div>
+                            <label for="contrato-objeto">Objeto do Contrato:</label>
+                            <input type="text" id="contrato-objeto" placeholder="Objeto do contrato">
+                        </div>
+                        <fieldset>
+                            <legend>Natureza e Critério</legend>
+                            <div>
+                                <label for="contrato-natureza">Natureza Contratação (separado por vírgula):</label>
+                                <input type="text" id="contrato-natureza" placeholder="1, 2, 3">
+                            </div>
+                             <div>
+                                <label for="contrato-natureza-outro">Natureza (Outro):</label>
+                                <input type="text" id="contrato-natureza-outro" placeholder="Descrição de outros serviços">
+                            </div>
+                             <div>
+                                <label for="contrato-criterio">Critério Seleção:</label>
+                                <input type="number" id="contrato-criterio" placeholder="1">
+                            </div>
+                             <div>
+                                <label for="contrato-criterio-outro">Critério (Outro):</label>
+                                <input type="text" id="contrato-criterio-outro" placeholder="Descrição de outros critérios">
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                             <legend>Valores e Regulamento</legend>
+                             <div>
+                                <label for="contrato-artigo">Artigo Regulamento Compras:</label>
+                                <input type="text" id="contrato-artigo" placeholder="Artigo 1">
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="contrato-valor-montante">Valor (Montante):</label>
+                                    <input type="number" id="contrato-valor-montante" placeholder="1.23" step="0.01">
+                                </div>
+                                <div>
+                                    <label for="contrato-valor-tipo">Valor (Tipo):</label>
+                                    <input type="number" id="contrato-valor-tipo" placeholder="1">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button type="button" class="btn-add" style="width:100%;" onclick="addContrato()">+ Adicionar Contrato</button>
+                    </fieldset>
+                    <h3>Contratos Adicionados</h3>
+                    <div id="lista-contratos" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonContratos()">
+                        Gerar JSON (Contratos)
+                    </button>
+                </div>
+
+                <div id="page-docfiscais" class="content-page">
+                    <h2>5. Documentos Fiscais</h2>
+                    <fieldset>
+                        <legend>Adicionar Novo Documento Fiscal</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="doc-numero">Número:</label>
+                                <input type="text" id="doc-numero" placeholder="0987654321">
+                            </div>
+                            <div>
+                                <label for="doc-data-emissao">Data Emissão:</label>
+                                <input type="date" id="doc-data-emissao">
+                            </div>
+                        </div>
+                        <div>
+                             <label for="doc-descricao">Descrição:</label>
+                            <input type="text" id="doc-descricao" placeholder="Descrição do Documento Fiscal">
+                        </div>
+                        <fieldset>
+                            <legend>Credor do Documento</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="doc-credor-tipo">Tipo Documento:</label>
+                                    <input type="number" id="doc-credor-tipo" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="doc-credor-numero">Número Documento:</label>
+                                    <input type="text" id="doc-credor-numero" placeholder="00000000272">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="doc-credor-nome">Nome/Razão Social:</label>
+                                <input type="text" id="doc-credor-nome" placeholder="Nome/Razão Social do Credor">
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Identificação do Contrato (se houver)</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="doc-contrato-numero">Número Contrato:</label>
+                                    <input type="text" id="doc-contrato-numero" placeholder="1234657890">
+                                </div>
+                                <div>
+                                    <label for="doc-contrato-data">Data Assinatura Contrato:</label>
+                                    <input type="date" id="doc-contrato-data">
+                                </div>
+                            </div>
+                            <fieldset>
+                                <legend>Credor do Contrato</legend>
+                                <div class="form-row">
+                                    <div>
+                                        <label for="doc-contrato-credor-tipo">Tipo Documento Credor:</label>
+                                        <input type="number" id="doc-contrato-credor-tipo" placeholder="1">
+                                    </div>
+                                    <div>
+                                        <label for="doc-contrato-credor-numero">Número Documento Credor:</label>
+                                        <input type="text" id="doc-contrato-credor-numero" placeholder="00000000191">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Valores e Classificação</legend>
+                             <div class="form-row">
+                                <div>
+                                    <label for="doc-estado-emissor">Estado Emissor (Cód. IBGE):</label>
+                                    <input type="number" id="doc-estado-emissor" placeholder="26">
+                                </div>
+                                <div>
+                                    <label for="doc-valor-bruto">Valor Bruto:</label>
+                                    <input type="number" id="doc-valor-bruto" placeholder="1.23" step="0.01">
+                                </div>
+                                 <div>
+                                    <label for="doc-valor-encargos">Valor Encargos:</label>
+                                    <input type="number" id="doc-valor-encargos" placeholder="1.23" step="0.01">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="doc-categoria-despesa">Categoria Despesa (Tipo):</label>
+                                    <input type="number" id="doc-categoria-despesa" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="doc-rateio-tipo">Rateio Proveniente (Tipo):</label>
+                                    <input type="number" id="doc-rateio-tipo" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="doc-rateio-percentual">Rateio (Percentual):</label>
+                                    <input type="number" id="doc-rateio-percentual" placeholder="1.23" step="0.01">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button type="button" class="btn-add" style="width:100%;" onclick="addDocumentoFiscal()">+ Adicionar Documento Fiscal</button>
+                    </fieldset>
+                    <h3>Documentos Fiscais Adicionados</h3>
+                    <div id="lista-docfiscais" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonDocFiscais()">
+                        Gerar JSON (Documentos Fiscais)
+                    </button>
+                </div>
+
+                <div id="page-pagamentos" class="content-page">
+                    <h2>6. Pagamentos</h2>
+                    <fieldset>
+                        <legend>Adicionar Novo Pagamento</legend>
+                        <fieldset>
+                            <legend>Identificação do Documento Fiscal</legend>
+                            <div>
+                                <label for="pag-doc-numero">Número Doc. Fiscal:</label>
+                                <input type="text" id="pag-doc-numero" placeholder="0987654321">
+                            </div>
+                            <fieldset>
+                                <legend>Identificação do Credor (do Doc. Fiscal)</legend>
+                                <div class="form-row">
+                                    <div>
+                                        <label for="pag-doc-credor-tipo">Tipo Documento:</label>
+                                        <input type="number" id="pag-doc-credor-tipo" placeholder="1">
+                                    </div>
+                                    <div>
+                                        <label for="pag-doc-credor-numero">Número Documento:</label>
+                                        <input type="text" id="pag-doc-credor-numero" placeholder="00000000272">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Dados do Pagamento</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="pag-data">Data Pagamento:</label>
+                                    <input type="date" id="pag-data">
+                                </div>
+                                <div>
+                                    <label for="pag-valor">Valor Pagamento:</label>
+                                    <input type="number" id="pag-valor" placeholder="1.23" step="0.01">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="pag-fonte-recurso">Fonte Recurso (Tipo):</label>
+                                    <input type="number" id="pag-fonte-recurso" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="pag-meio-pagamento">Meio Pagamento (Tipo):</label>
+                                    <input type="number" id="pag-meio-pagamento" placeholder="1">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Dados Bancários</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="pag-banco">Banco (Cód.):</label>
+                                    <input type="number" id="pag-banco" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="pag-agencia">Agência:</label>
+                                    <input type="number" id="pag-agencia" placeholder="1234">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="pag-conta">Conta Corrente:</label>
+                                    <input type="text" id="pag-conta" placeholder="5678X">
+                                </div>
+                                <div>
+                                    <label for="pag-transacao">Número Transação:</label>
+                                    <input type="text" id="pag-transacao" placeholder="001ABC">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button type="button" class="btn-add" style="width:100%;" onclick="addPagamento()">+ Adicionar Pagamento</button>
+                    </fieldset>
+                    <h3>Pagamentos Adicionados</h3>
+                    <div id="lista-pagamentos" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonPagamentos()">
+                        Gerar JSON (Pagamentos)
+                    </button>
+                </div>
+                
+                <div id="page-disponibilidades" class="content-page">
+                    <h2>7. Disponibilidades</h2>
+                    <fieldset>
+                        <legend>Fundo Fixo</legend>
+                        <div>
+                            <label for="disp-fundo-fixo">Saldo Fundo Fixo:</label>
+                            <input type="number" id="disp-fundo-fixo" placeholder="1.23" step="0.01">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Adicionar Saldo Bancário</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="saldo-banco">Banco (Cód.):</label>
+                                <input type="number" id="saldo-banco" placeholder="1">
+                            </div>
+                            <div>
+                                <label for="saldo-agencia">Agência:</label>
+                                <input type="number" id="saldo-agencia" placeholder="1234">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="saldo-conta">Conta:</label>
+                                <input type="text" id="saldo-conta" placeholder="5678X">
+                            </div>
+                            <div>
+                                <label for="saldo-conta-tipo">Conta (Tipo):</label>
+                                <input type="number" id="saldo-conta-tipo" placeholder="1">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="saldo-bancario">Saldo Bancário:</label>
+                                <input type="number" id="saldo-bancario" placeholder="1.23" step="0.01">
+                            </div>
+                            <div>
+                                <label for="saldo-contabil">Saldo Contábil:</label>
+                                <input type="number" id="saldo-contabil" placeholder="1.23" step="0.01">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addSaldo()">+ Adicionar Saldo</button>
+                    </fieldset>
+                    <h3>Saldos Adicionados</h3>
+                    <div id="lista-saldos" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonDisponibilidades()">
+                        Gerar JSON (Disponibilidades)
+                    </button>
+                </div>
+                
+                <div id="page-receitas" class="content-page">
+                    <h2>8. Receitas</h2>
+                    <fieldset>
+                        <legend>Receitas de Aplicações Financeiras</legend>
+                        <div>
+                            <label for="rec-aplic-municipais">Repasses Públicos Municipais:</label>
+                            <input type="number" id="rec-aplic-municipais" placeholder="1.23" step="0.01">
+                        </div>
+                        <div>
+                            <label for="rec-aplic-estaduais">Repasses Públicos Estaduais:</label>
+                            <input type="number" id="rec-aplic-estaduais" placeholder="1.23" step="0.01">
+                        </div>
+                        <div>
+                            <label for="rec-aplic-federais">Repasses Públicos Federais:</label>
+                            <input type="number" id="rec-aplic-federais" placeholder="1.23" step="0.01">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Repasses Recebidos</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="rep-data-prevista">Data Prevista:</label>
+                                <input type="date" id="rep-data-prevista">
+                            </div>
+                            <div>
+                                <label for="rep-data-repasse">Data Repasse:</label>
+                                <input type="date" id="rep-data-repasse">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="rep-valor">Valor:</label>
+                                <input type="number" id="rep-valor" placeholder="1.23" step="0.01">
+                            </div>
+                            <div>
+                                <label for="rep-fonte-recurso">Fonte Recurso (Tipo):</label>
+                                <input type="number" id="rep-fonte-recurso" placeholder="1">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addRepasseRecebido()">+ Adicionar Repasse</button>
+                        <div id="lista-repasses-recebidos" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Outras Receitas</legend>
+                        <div>
+                            <label for="outra-descricao">Descrição:</label>
+                            <input type="text" id="outra-descricao" placeholder="Descrição">
+                        </div>
+                        <div>
+                            <label for="outra-valor">Valor:</label>
+                            <input type="number" id="outra-valor" placeholder="1.23" step="0.01">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addOutraReceita()">+ Adicionar Outra Receita</button>
+                        <div id="lista-outras-receitas" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Recursos Próprios</legend>
+                        <div>
+                            <label for="proprio-descricao">Descrição:</label>
+                            <input type="text" id="proprio-descricao" placeholder="Descrição">
+                        </div>
+                        <div>
+                            <label for="proprio-valor">Valor:</label>
+                            <input type="number" id="proprio-valor" placeholder="1.23" step="0.01">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addRecursoProprio()">+ Adicionar Recurso Próprio</button>
+                        <div id="lista-recursos-proprios" class="list-container"></div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonReceitas()">
+                        Gerar JSON (Receitas)
+                    </button>
+                </div>
+
+                <div id="page-ajustes" class="content-page">
+                    <h2>9. Ajustes de Saldo</h2>
+                    <fieldset>
+                        <legend>Retificação de Repasses</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="ajuste-rr-data-prevista">Data Prevista:</label>
+                                <input type="date" id="ajuste-rr-data-prevista">
+                            </div>
+                            <div>
+                                <label for="ajuste-rr-data-repasse">Data Repasse:</label>
+                                <input type="date" id="ajuste-rr-data-repasse">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="ajuste-rr-valor-retificado">Valor Retificado:</label>
+                            <input type="number" id="ajuste-rr-valor-retificado" placeholder="4.56" step="0.01">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addRetificacaoRepasse()">+ Adicionar Retificação de Repasse</button>
+                        <div id="lista-retificacao-repasses" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Inclusão de Repasses</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="ajuste-ir-data-prevista">Data Prevista:</label>
+                                <input type="date" id="ajuste-ir-data-prevista">
+                            </div>
+                            <div>
+                                <label for="ajuste-ir-data-repasse">Data Repasse:</label>
+                                <input type="date" id="ajuste-ir-data-repasse">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="ajuste-ir-valor">Valor:</label>
+                                <input type="number" id="ajuste-ir-valor" placeholder="1.23" step="0.01">
+                            </div>
+                            <div>
+                                <label for="ajuste-ir-fonte">Fonte Recurso (Tipo):</label>
+                                <input type="number" id="ajuste-ir-fonte" placeholder="1">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addInclusaoRepasse()">+ Adicionar Inclusão de Repasse</button>
+                        <div id="lista-inclusao-repasses" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Retificação de Pagamentos</legend>
+                        <fieldset>
+                            <legend>Identificação do Documento Fiscal</legend>
+                            <div>
+                                <label for="ajuste-rp-doc-numero">Número Doc. Fiscal:</label>
+                                <input type="text" id="ajuste-rp-doc-numero" placeholder="0987654321">
+                            </div>
+                            <fieldset>
+                                <legend>Identificação do Credor (do Doc. Fiscal)</legend>
+                                <div class="form-row">
+                                    <div>
+                                        <label for="ajuste-rp-credor-tipo">Tipo Documento:</label>
+                                        <input type="number" id="ajuste-rp-credor-tipo" placeholder="1">
+                                    </div>
+                                    <div>
+                                        <label for="ajuste-rp-credor-numero">Número Documento:</label>
+                                        <input type="text" id="ajuste-rp-credor-numero" placeholder="00000000272">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Dados da Retificação</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="ajuste-rp-data">Pagamento Data:</label>
+                                    <input type="date" id="ajuste-rp-data">
+                                </div>
+                                <div>
+                                    <label for="ajuste-rp-fonte">Fonte Recurso (Tipo):</label>
+                                    <input type="number" id="ajuste-rp-fonte" placeholder="1">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="ajuste-rp-valor">Pagamento Valor (Original):</label>
+                                    <input type="number" id="ajuste-rp-valor" placeholder="1.23" step="0.01">
+                                </div>
+                                <div>
+                                    <label for="ajuste-rp-valor-retificado">Valor Retificado:</label>
+                                    <input type="number" id="ajuste-rp-valor-retificado" placeholder="4.56" step="0.01">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button type="button" class="btn-add" style="width:100%;" onclick="addRetificacaoPagamento()">+ Adicionar Retificação</button>
+                    </fieldset>
+                    <h3>Retificações de Pagamento Adicionadas</h3>
+                    <div id="lista-retificacao-pagamentos" class="list-container"></div>
+                    <fieldset>
+                        <legend>Inclusão de Pagamentos</legend>
+                        <fieldset>
+                            <legend>Identificação do Documento Fiscal</legend>
+                            <div>
+                                <label for="ajuste-ip-doc-numero">Número Doc. Fiscal:</label>
+                                <input type="text" id="ajuste-ip-doc-numero" placeholder="0987654321">
+                            </div>
+                            <fieldset>
+                                <legend>Identificação do Credor (do Doc. Fiscal)</legend>
+                                <div class="form-row">
+                                    <div>
+                                        <label for="ajuste-ip-credor-tipo">Tipo Documento:</label>
+                                        <input type="number" id="ajuste-ip-credor-tipo" placeholder="1">
+                                    </div>
+                                    <div>
+                                        <label for="ajuste-ip-credor-numero">Número Documento:</label>
+                                        <input type="text" id="ajuste-ip-credor-numero" placeholder="00000000272">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Dados do Pagamento</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="ajuste-ip-data">Data Pagamento:</label>
+                                    <input type="date" id="ajuste-ip-data">
+                                </div>
+                                <div>
+                                    <label for="ajuste-ip-valor">Valor Pagamento:</label>
+                                    <input type="number" id="ajuste-ip-valor" placeholder="1.23" step="0.01">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="ajuste-ip-fonte-recurso">Fonte Recurso (Tipo):</label>
+                                    <input type="number" id="ajuste-ip-fonte-recurso" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="ajuste-ip-meio-pagamento">Meio Pagamento (Tipo):</label>
+                                    <input type="number" id="ajuste-ip-meio-pagamento" placeholder="1">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Dados Bancários</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="ajuste-ip-banco">Banco (Cód.):</label>
+                                    <input type="number" id="ajuste-ip-banco" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="ajuste-ip-agencia">Agência:</label>
+                                    <input type="number" id="ajuste-ip-agencia" placeholder="1234">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="ajuste-ip-conta">Conta Corrente:</label>
+                                    <input type="text" id="ajuste-ip-conta" placeholder="5678X">
+                                </div>
+                                <div>
+                                    <label for="ajuste-ip-transacao">Número Transação:</label>
+                                    <input type="text" id="ajuste-ip-transacao" placeholder="001ABC">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button type="button" class="btn-add" style="width:100%;" onclick="addInclusaoPagamento()">+ Adicionar Inclusão de Pagamento</button>
+                    </fieldset>
+                    <h3>Inclusões de Pagamento Adicionadas</h3>
+                    <div id="lista-inclusao-pagamentos" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonAjustesSaldo()">
+                        Gerar JSON (Ajustes de Saldo)
+                    </button>
+                </div>
+
+                <div id="page-servidores" class="content-page">
+                    <h2>10. Relação de Servidores Cedidos pelo Órgão Concessor</h2>
+                    <fieldset>
+                        <legend>Adicionar Novo Servidor Cedido</legend>
+                        <div>
+                            <label for="serv-cpf">CPF:</label>
+                            <input type="text" id="serv-cpf" placeholder="00000000191">
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="serv-data-inicio">Data Inicial Cessão:</label>
+                                <input type="date" id="serv-data-inicio">
+                            </div>
+                            <div>
+                                <label for="serv-data-final">Data Final Cessão:</label>
+                                <input type="date" id="serv-data-final">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="serv-cargo">Cargo Público Ocupado:</label>
+                            <input type="text" id="serv-cargo" placeholder="Cargo">
+                        </div>
+                         <div>
+                            <label for="serv-funcao">Função Desempenhada:</label>
+                            <input type="text" id="serv-funcao" placeholder="Função">
+                        </div>
+                        <div>
+                            <label for="serv-onus">Ônus Pagamento (Tipo):</label>
+                            <input type="number" id="serv-onus" placeholder="1">
+                        </div>
+                        <div class="mini-form">
+                            <legend>Períodos de Cessão</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="cessao-mes">Mês:</label>
+                                    <input type="number" id="cessao-mes" placeholder="1" min="1" max="12">
+                                </div>
+                                <div>
+                                    <label for="cessao-carga">Carga Horária:</label>
+                                    <input type="number" id="cessao-carga" placeholder="160.0" step="0.1">
+                                </div>
+                                <div>
+                                    <label for="cessao-bruta">Remuneração Bruta:</label>
+                                    <input type="number" id="cessao-bruta" placeholder="1320.00" step="0.01">
+                                </div>
+                            </div>
+                            <button type="button" class="btn-add" style="font-size: 0.9em; padding: 8px 12px;" onclick="addPeriodoCessao()">
+                                + Adicionar Período
+                            </button>
+                            <div id="staging-periodos-cessao-list" class="staging-list-container"></div>
+                        </div>
+                        <button type="button" class="btn-add" style="width: 100%; margin-top: 20px;" onclick="salvarServidorCedido()">
+                            Salvar Servidor Cedido na Lista
+                        </button>
+                    </fieldset>
+                    <h3>Servidores Cedidos Adicionados</h3>
+                    <div id="lista-servidores-cedidos" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonServidoresCedidos()">
+                        Gerar JSON (Servidores Cedidos)
+                    </button>
+                </div>
+                
+                <div id="page-descontos" class="content-page">
+                    <h2>11. Descontos</h2>
+                    <fieldset>
+                        <legend>Adicionar Novo Desconto</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="desc-data">Data:</label>
+                                <input type="date" id="desc-data">
+                            </div>
+                            <div>
+                                <label for="desc-valor">Valor:</label>
+                                <input type="number" id="desc-valor" placeholder="1.23" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="desc-descricao">Descrição:</label>
+                            <input type="text" id="desc-descricao" placeholder="Descrição do Desconto">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addDesconto()">+ Adicionar Desconto</button>
+                    </fieldset>
+                    <h3>Descontos Adicionados</h3>
+                    <div id="lista-descontos" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonDescontos()">
+                        Gerar JSON (Descontos)
+                    </button>
+                </div>
+                
+                <div id="page-devolucoes" class="content-page">
+                    <h2>12. Devoluções</h2>
+                    <fieldset>
+                        <legend>Adicionar Nova Devolução</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="dev-data">Data:</label>
+                                <input type="date" id="dev-data">
+                            </div>
+                            <div>
+                                <label for="dev-natureza">Natureza Devolução (Tipo):</label>
+                                <input type="number" id="dev-natureza" placeholder="1">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="dev-valor">Valor:</label>
+                            <input type="number" id="dev-valor" placeholder="1.23" step="0.01">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addDevolucao()">+ Adicionar Devolução</button>
+                    </fieldset>
+                    <h3>Devoluções Adicionadas</h3>
+                    <div id="lista-devolucoes" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonDevolucoes()">
+                        Gerar JSON (Devoluções)
+                    </button>
+                </div>
+
+                <div id="page-glosas" class="content-page">
+                    <h2>13. Glosas</h2>
+                    <fieldset>
+                        <legend>Adicionar Nova Glosa</legend>
+                        <fieldset>
+                            <legend>Identificação do Documento Fiscal</legend>
+                            <div>
+                                <label for="glosa-doc-numero">Número Doc. Fiscal:</label>
+                                <input type="text" id="glosa-doc-numero" placeholder="0987654321">
+                            </div>
+                            <fieldset>
+                                <legend>Identificação do Credor (do Doc. Fiscal)</legend>
+                                <div class="form-row">
+                                    <div>
+                                        <label for="glosa-credor-tipo">Tipo Documento:</label>
+                                        <input type="number" id="glosa-credor-tipo" placeholder="1">
+                                    </div>
+                                    <div>
+                                        <label for="glosa-credor-numero">Número Documento:</label>
+                                        <input type="text" id="glosa-credor-numero" placeholder="00000000272">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </fieldset>
+                        <div class="form-row">
+                            <div>
+                                <label for="glosa-resultado">Resultado Análise (Tipo):</label>
+                                <input type="number" id="glosa-resultado" placeholder="2">
+                            </div>
+                            <div>
+                                <label for="glosa-valor">Valor Glosa:</label>
+                                <input type="number" id="glosa-valor" placeholder="1.23" step="0.01">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" style="width:100%;" onclick="addGlosa()">+ Adicionar Glosa</button>
+                    </fieldset>
+                    <h3>Glosas Adicionadas</h3>
+                    <div id="lista-glosas" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonGlosas()">
+                        Gerar JSON (Glosas)
+                    </button>
+                </div>
+                
+                <div id="page-empenhos" class="content-page">
+                    <h2>14. Empenhos</h2>
+                    <fieldset>
+                        <legend>Adicionar Novo Empenho</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="emp-numero">Número:</label>
+                                <input type="text" id="emp-numero" placeholder="1234567890">
+                            </div>
+                            <div>
+                                <label for="emp-data-emissao">Data Emissão:</label>
+                                <input type="date" id="emp-data-emissao">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="emp-classificacao">Classificação Econômica (Tipo):</label>
+                                <input type="text" id="emp-classificacao" placeholder="12345678">
+                            </div>
+                            <div>
+                                <label for="emp-fonte-recurso">Fonte Recurso (Tipo):</label>
+                                <input type="number" id="emp-fonte-recurso" placeholder="1">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="emp-valor">Valor:</label>
+                                <input type="number" id="emp-valor" placeholder="1.23" step="0.01">
+                            </div>
+                            <div>
+                                <label for="emp-cpf-ordenador">CPF Ordenador Despesa:</label>
+                                <input type="text" id="emp-cpf-ordenador" placeholder="00000000191">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="emp-historico">Histórico:</label>
+                            <input type="text" id="emp-historico" placeholder="Histórico">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addEmpenho()">+ Adicionar Empenho</button>
+                    </fieldset>
+                    <h3>Empenhos Adicionados</h3>
+                    <div id="lista-empenhos" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonEmpenhos()">
+                        Gerar JSON (Empenhos)
+                    </button>
+                </div>
+                
+                <div id="page-repasses" class="content-page">
+                    <h2>15. Repasses</h2>
+                    <fieldset>
+                        <legend>Adicionar Novo Repasse</legend>
+                        <fieldset>
+                            <legend>Identificação do Empenho</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="repasse-emp-numero">Número Empenho:</label>
+                                    <input type="text" id="repasse-emp-numero" placeholder="1234567890">
+                                </div>
+                                <div>
+                                    <label for="repasse-emp-data">Data Emissão Empenho:</label>
+                                    <input type="date" id="repasse-emp-data">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Datas e Valores</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="repasse-data-prevista">Data Prevista:</label>
+                                    <input type="date" id="repasse-data-prevista">
+                                </div>
+                                <div>
+                                    <label for="repasse-data-repasse">Data Repasse:</label>
+                                    <input type="date" id="repasse-data-repasse">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="repasse-valor-previsto">Valor Previsto:</label>
+                                    <input type="number" id="repasse-valor-previsto" placeholder="1.23" step="0.01">
+                                </div>
+                                <div>
+                                    <label for="repasse-valor-repasse">Valor Repasse:</label>
+                                    <input type="number" id="repasse-valor-repasse" placeholder="4.56" step="0.01">
+                                </div>
+                            </div>
+                             <div>
+                                <label for="repasse-justificativa">Justificativa Diferença:</label>
+                                <input type="text" id="repasse-justificativa" placeholder="Justificativa">
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Documentação e Conta</legend>
+                             <div class="form-row">
+                                <div>
+                                    <label for="repasse-doc-tipo">Tipo Documento Bancário:</label>
+                                    <input type="number" id="repasse-doc-tipo" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="repasse-doc-numero">Número Documento:</label>
+                                    <input type="text" id="repasse-doc-numero" placeholder="ABC123">
+                                </div>
+                            </div>
+                             <div>
+                                <label for="repasse-doc-outros">Descrição (Outros):</label>
+                                <input type="text" id="repasse-doc-outros" placeholder="Outro documento bancário">
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="repasse-banco">Banco (Cód.):</label>
+                                    <input type="number" id="repasse-banco" placeholder="1">
+                                </div>
+                                <div>
+                                    <label for="repasse-agencia">Agência:</label>
+                                    <input type="number" id="repasse-agencia" placeholder="1234">
+                                </div>
+                                <div>
+                                    <label for="repasse-conta">Conta:</label>
+                                    <input type="text" id="repasse-conta" placeholder="5678X">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button type="button" class="btn-add" style="width:100%;" onclick="addRepasse()">+ Adicionar Repasse</button>
+                    </fieldset>
+                    <h3>Repasses Adicionados</h3>
+                    <div id="lista-repasses" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonRepasses()">
+                        Gerar JSON (Repasses)
+                    </button>
+                </div>
+                
+                <div id="page-rel-atividades" class="content-page">
+                    <h2>16. Relatórios de Atividades</h2>
+                    <fieldset id="form-programa">
+                        <legend>Adicionar Novo Programa</legend>
+                        <div>
+                            <label for="programa-nome">Nome do Programa:</label>
+                            <input type="text" id="programa-nome" placeholder="Programa ABC">
+                        </div>
+                        <fieldset id="form-meta">
+                            <legend>Adicionar Metas ao Programa</legend>
+                            <div>
+                                <label for="meta-codigo">Código da Meta:</label>
+                                <input type="text" id="meta-codigo" placeholder="ABC0001">
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="meta-atendida">Meta Atendida?</label>
+                                    <select id="meta-atendida" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                        <option value="true">Sim</option>
+                                        <option value="false">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="meta-justificativa">Justificativa (se não atendida no exercício):</label>
+                                <input type="text" id="meta-justificativa" placeholder="Justificativa para meta não atendida">
+                            </div>
+                            <div class="mini-form">
+                                <legend>Adicionar Periodicidades à Meta</legend>
+                                <div class="form-row">
+                                    <div>
+                                        <label for="periodo-num">Período (Mês):</label>
+                                        <input type="number" id="periodo-num" placeholder="1">
+                                    </div>
+                                    <div>
+                                        <label for="periodo-qtd">Qtd. Realizada (Opcional):</label>
+                                        <input type="number" id="periodo-qtd" step="0.01" placeholder="100.00">
+                                    </div>
+                                    <div>
+                                        <label for="periodo-res">Resultado (Opcional):</label>
+                                        <input type="number" id="periodo-res" placeholder="2">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="periodo-just">Justificativa (Opcional):</label>
+                                    <input type="text" id="periodo-just" placeholder="Justificativa da divergência no período">
+                                </div>
+                                <button type="button" class="btn-add" style="font-size: 0.9em; padding: 8px 12px;" onclick="addPeriodicidade()">
+                                    + Adicionar Período
+                                </button>
+                                <div id="staging-periodicidades-list" class="staging-list-container">
+                                </div>
+                            </div>
+                            <button type="button" class="btn-add" style="width: 100%; margin-top: 20px;" onclick="salvarMeta()">
+                                + Salvar Meta na Lista do Programa
+                            </button>
+                            <h4>Metas prontas para o Programa:</h4>
+                            <div id="staging-metas-list" class="list-container" style="margin-top: 10px;">
+                            </div>
+                        </fieldset>
+                        <button type="button" class="btn-add" style="width: 100%; margin-top: 20px; background-color: #1a73e8;" onclick="salvarPrograma()">
+                            Salvar Programa na Lista Principal
+                        </button>
+                    </fieldset>
+                    <h3>Programas Adicionados</h3>
+                    <div id="lista-programas" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonRelatorioAtividades()">
+                        Gerar JSON (Relatório de Atividades)
+                    </button>
+                </div>
+                
+                <div id="page-dados-gerais-entidade" class="content-page">
+                    <h2>17. Dados Gerais da Entidade Beneficiária</h2>
+                    <fieldset>
+                        <legend>Certidões</legend>
+                        <div>
+                            <label for="certidao-dados-gerais">ID Certidão de Dados Gerais:</label>
+                            <input type="text" id="certidao-dados-gerais" placeholder="0123456789">
+                        </div>
+                        <div>
+                            <label for="certidao-corpo-diretivo">ID Certidão do Corpo Diretivo:</label>
+                            <input type="text" id="certidao-corpo-diretivo" placeholder="0123456789">
+                        </div>
+                        <div>
+                            <label for="certidao-membros-conselho">ID Certidão dos Membros do Conselho:</label>
+                            <input type="text" id="certidao-membros-conselho" placeholder="0123456789">
+                        </div>
+                        <div>
+                            <label for="certidao-responsaveis-entidade">ID Certidão dos Responsáveis (Entidade):</label>
+                            <input type="text" id="certidao-responsaveis-entidade" placeholder="0123456789">
+                        </div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonDadosGeraisEntidade()">
+                        Gerar JSON (Dados Gerais Entidade)
+                    </button>
+                </div>
+
+                <div id="page-responsaveis" class="content-page">
+                    <h2>18. Responsáveis e Membros (Órgão Concessor)</h2>
+                    <fieldset>
+                        <legend>Certidões do Órgão Concessor</legend>
+                        <div>
+                            <label for="certidao-responsaveis-concessor">ID Certidão dos Responsáveis (Concessor):</label>
+                            <input type="text" id="certidao-responsaveis-concessor" placeholder="0123456789">
+                        </div>
+                        <div>
+                            <label for="certidao-membros-comissao">ID Certidão Membros Comissão Avaliação:</label>
+                            <input type="text" id="certidao-membros-comissao" placeholder="0123456789">
+                        </div>
+                        <div>
+                            <label for="certidao-membros-controle">ID Certidão Membros Controle Interno:</label>
+                            <input type="text" id="certidao-membros-controle" placeholder="0123456789">
+                        </div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonResponsaveisOrgao()">
+                        Gerar JSON (Responsáveis e Membros)
+                    </button>
+                </div>
+
+                <div id="page-pub-regulamento" class="content-page">
+                    <h2>19. Publicação do Regulamento de Compras</h2>
+                    <fieldset>
+                        <legend>Publicação Inicial</legend>
+                        <div>
+                            <label for="pub-inicial-houve">Houve Publicação Inicial?</label>
+                            <select id="pub-inicial-houve" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                <option value="true">Sim</option>
+                                <option value="false">Não</option>
+                            </select>
+                        </div>
+                        <fieldset>
+                            <legend>Adicionar Publicação Inicial</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="pub-inicial-tipo">Tipo Veículo Publicação:</label>
+                                    <input type="number" id="pub-inicial-tipo" placeholder="2">
+                                </div>
+                                <div>
+                                    <label for="pub-inicial-data">Data Publicação:</label>
+                                    <input type="date" id="pub-inicial-data">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="pub-inicial-nome">Nome Veículo (se Outros):</label>
+                                <input type="text" id="pub-inicial-nome" placeholder="Nome se Outros">
+                            </div>
+                            <div>
+                                <label for="pub-inicial-url">Endereço Internet:</label>
+                                <input type="text" id="pub-inicial-url" placeholder="https://doe.tce.sp.gov.br">
+                            </div>
+                            <button type="button" class="btn-add" onclick="addPubInicial()">+ Adicionar Publicação</button>
+                            <div id="lista-pub-inicial" class="list-container"></div>
+                        </fieldset>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Alteração do Regulamento</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="pub-alteracao-houve">Houve Alteração?</label>
+                                <select id="pub-alteracao-houve" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false">Não</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="pub-alteracao-publicada">Houve Publicação da Alteração?</label>
+                                <select id="pub-alteracao-publicada" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false">Não</option>
+                                </select>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <legend>Adicionar Publicação de Alteração</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="pub-alteracao-tipo">Tipo Veículo Publicação:</label>
+                                    <input type="number" id="pub-alteracao-tipo" placeholder="2">
+                                </div>
+                                <div>
+                                    <label for="pub-alteracao-data">Data Publicação:</label>
+                                    <input type="date" id="pub-alteracao-data">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="pub-alteracao-nome">Nome Veículo (se Outros):</label>
+                                <input type="text" id="pub-alteracao-nome" placeholder="Nome se Outros">
+                            </div>
+                            <div>
+                                <label for="pub-alteracao-url">Endereço Internet:</label>
+                                <input type="text" id="pub-alteracao-url" placeholder="https://doe.tce.sp.gov.br">
+                            </div>
+                            <button type="button" class="btn-add" onclick="addPubAlteracao()">+ Adicionar Publicação</button>
+                            <div id="lista-pub-alteracao" class="list-container"></div>
+                        </fieldset>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonPubRegulamento()">
+                        Gerar JSON (Publicação Regulamento)
+                    </button>
+                </div>
+                
+                <div id="page-pub-extrato" class="content-page">
+                    <h2>20. Publicação do Extrato de Execução Física e Financeira</h2>
+                    <fieldset>
+                        <legend>Status da Publicação</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="extrato-ha">Há Extrato de Execução?</label>
+                                <select id="extrato-ha" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false">Não</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="extrato-conforme">Elaborado conforme modelo?</label>
+                                <select id="extrato-conforme" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false">Não</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Adicionar Publicação do Extrato</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="extrato-pub-tipo">Tipo Veículo Publicação:</label>
+                                <input type="number" id="extrato-pub-tipo" placeholder="2">
+                            </div>
+                            <div>
+                                <label for="extrato-pub-data">Data Publicação:</label>
+                                <input type="date" id="extrato-pub-data">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="extrato-pub-nome">Nome Veículo (se Outros):</label>
+                            <input type="text" id="extrato-pub-nome" placeholder="Nome se Outros">
+                        </div>
+                        <div>
+                            <label for="extrato-pub-url">Endereço Internet:</label>
+                            <input type="text" id="extrato-pub-url" placeholder="https://doe.tce.sp.gov.br">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addPubExtrato()">+ Adicionar Publicação</button>
+                        <div id="lista-pub-extrato" class="list-container"></div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonPubExtrato()">
+                        Gerar JSON (Publicação Extrato)
+                    </button>
+                </div>
+                
+                <div id="page-declaracoes" class="content-page">
+                    <h2>21. Declarações</h2>
+                    <fieldset>
+                        <legend>Contratação de Empresas Pertencentes</legend>
+                        <div>
+                            <label for="decl-houve-contratacao">Houve contratação de empresas pertencentes?</label>
+                            <select id="decl-houve-contratacao" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                <option value="true">Sim</option>
+                                <option value="false" selected>Não</option>
+                            </select>
+                        </div>
+                        <fieldset>
+                            <legend>Adicionar Empresa Pertencente</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="empresa-cnpj">CNPJ:</label>
+                                    <input type="text" id="empresa-cnpj" placeholder="12345678901234">
+                                </div>
+                                <div>
+                                    <label for="empresa-cpf">CPF (do Sócio):</label>
+                                    <input type="text" id="empresa-cpf" placeholder="00000000191">
+                                </div>
+                            </div>
+                            <button type="button" class="btn-add" onclick="addEmpresaPertencente()">+ Adicionar Empresa</button>
+                            <div id="lista-empresas-pertencentes" class="list-container"></div>
+                        </fieldset>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Participação no Quadro Diretivo/Administrativo</legend>
+                        <div>
+                            <label for="decl-houve-participacao">Houve participação no quadro diretivo?</label>
+                            <select id="decl-houve-participacao" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                <option value="true">Sim</option>
+                                <option value="false" selected>Não</option>
+                            </select>
+                        </div>
+                        <fieldset id="form-participacao">
+                            <legend>Adicionar Participação</legend>
+                            <div>
+                                <label for="part-cpf-dirigente">CPF do Dirigente:</label>
+                                <input type="text" id="part-cpf-dirigente" placeholder="00000000191">
+                            </div>
+                            <div class="mini-form">
+                                <legend>Adicionar CPFs de Contratados (ligados a este dirigente)</legend>
+                                <div class="form-row">
+                                    <div style="flex-grow: 2;">
+                                        <label for="part-cpf-contratado">CPF do Contratado:</label>
+                                        <input type="text" id="part-cpf-contratado" placeholder="00000000272">
+                                    </div>
+                                    <div style="flex-grow: 1;">
+                                        <label>&nbsp;</label> <button type="button" class="btn-add" style="width:100%;" onclick="addCpfContratado()">
+                                            + Adicionar CPF
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="staging-cpf-contratados-list" class="staging-list-container">
+                                </div>
+                            </div>
+                            <button type="button" class="btn-add" style="width: 100%; margin-top: 20px;" onclick="salvarParticipacaoDiretivo()">
+                                + Salvar Participação (Dirigente + Contratados)
+                            </button>
+                        </fieldset>
+                        <h3>Participações Adicionadas</h3>
+                        <div id="lista-participacoes-diretivo" class="list-container"></div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonDeclaracoes()">
+                        Gerar JSON (Declarações)
+                    </button>
+                </div>
+                
+                <div id="page-rel-comissao" class="content-page">
+                    <h2>22. Relatório de Comissão de Avaliação</h2>
+                    <fieldset>
+                        <legend>Relatório Final</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="comissao-houve-emissao">Houve Emissão do Relatório Final?</label>
+                                <select id="comissao-houve-emissao" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false" selected>Não</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="comissao-conclusao">Conclusão do Relatório (Tipo):</label>
+                                <input type="number" id="comissao-conclusao" placeholder="1">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="comissao-justificativa">Justificativa (para conclusão desfavorável):</label>
+                            <input type="text" id="comissao-justificativa" placeholder="Justificativa para conclusão desfavorável">
+                        </div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonRelComissao()">
+                        Gerar JSON (Relatório Comissão)
+                    </button>
+                </div>
+                
+                <div id="page-rel-governamental" class="content-page">
+                    <h2>23. Rel. Governamental da Análise da Execução</h2>
+                    <fieldset>
+                        <legend>Relatório Final</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="gov-houve-emissao">Houve Emissão do Relatório Final?</label>
+                                <select id="gov-houve-emissao" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false" selected>Não</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="gov-conclusao">Conclusão do Relatório (Tipo):</label>
+                                <input type="number" id="gov-conclusao" placeholder="1">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="gov-justificativa">Justificativa (para conclusão desfavorável):</label>
+                            <input type="text" id="gov-justificativa" placeholder="Justificativa para conclusão desfavorável">
+                        </div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonRelGovernamental()">
+                        Gerar JSON (Relatório Governamental)
+                    </button>
+                </div>
+                
+                <div id="page-rel-monitoramento" class="content-page">
+                    <h2>24. Rel. de Monitoramento e Avaliação</h2>
+                    <fieldset>
+                        <legend>Relatório Final</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="monit-houve-emissao">Houve Emissão do Relatório Final?</label>
+                                <select id="monit-houve-emissao" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false" selected>Não</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="monit-conclusao">Conclusão do Relatório (Tipo):</label>
+                                <input type="number" id="monit-conclusao" placeholder="1">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="monit-justificativa">Justificativa (para conclusão desfavorável):</label>
+                            <input type="text" id="monit-justificativa" placeholder="Justificativa para conclusão desfavorável">
+                        </div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonRelMonitoramento()">
+                        Gerar JSON (Relatório Monitoramento)
+                    </button>
+                </div>
+
+                <div id="page-demonstracoes" class="content-page">
+                    <h2>25. Demonstrações Contábeis</h2>
+                    <fieldset>
+                        <legend>Responsável Técnico</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="demo-crc">Número CRC:</label>
+                                <input type="text" id="demo-crc" placeholder="1SP000001">
+                            </div>
+                            <div>
+                                <label for="demo-cpf">CPF:</label>
+                                <input type="text" id="demo-cpf" placeholder="00000000191">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="demo-crc-regular">Situação Regular CRC?</label>
+                            <select id="demo-crc-regular" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                <option value="true" selected>Sim</option>
+                                <option value="false">Não</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Adicionar Publicação das Demonstrações</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="demo-pub-tipo">Tipo Veículo Publicação:</label>
+                                <input type="number" id="demo-pub-tipo" placeholder="2">
+                            </div>
+                            <div>
+                                <label for="demo-pub-data">Data Publicação:</label>
+                                <input type="date" id="demo-pub-data">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="demo-pub-nome">Nome Veículo (se Outros):</label>
+                            <input type="text" id="demo-pub-nome" placeholder="Nome se Outros">
+                        </div>
+                        <div>
+                            <label for="demo-pub-url">Endereço Internet:</label>
+                            <input type="text" id="demo-pub-url" placeholder="https://doe.tce.sp.gov.br">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addDemonstracaoPublicacao()">+ Adicionar Publicação</button>
+                        <div id="lista-demonstracoes-publicacoes" class="list-container"></div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonDemonstracoesContabeis()">
+                        Gerar JSON (Demonstrações Contábeis)
+                    </button>
+                </div>
+                
+                <div id="page-pub-parecer" class="content-page">
+                    <h2>26. Publicações de Parecer ou Ata</h2>
+                    <fieldset id="form-parecer-ata">
+                        <legend>Adicionar Novo Parecer/Ata</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="pa-tipo">Tipo (Parecer ou Ata):</label>
+                                <input type="number" id="pa-tipo" placeholder="1">
+                            </div>
+                            <div>
+                                <label for="pa-houve-pub">Houve Publicação?</label>
+                                <select id="pa-houve-pub" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false" selected>Não</option>
+                                </select>
+                            </div>
+                             <div>
+                                <label for="pa-conclusao">Conclusão (Tipo):</label>
+                                <input type="number" id="pa-conclusao" placeholder="1">
+                            </div>
+                        </div>
+                        <div class="mini-form">
+                            <legend>Adicionar Publicações (deste Parecer/Ata)</legend>
+                            <div class="form-row">
+                                <div>
+                                    <label for="pa-pub-tipo">Tipo Veículo:</label>
+                                    <input type="number" id="pa-pub-tipo" placeholder="2">
+                                </div>
+                                <div>
+                                    <label for="pa-pub-data">Data Publicação:</label>
+                                    <input type="date" id="pa-pub-data">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="pa-pub-nome">Nome Veículo (se Outros):</label>
+                                <input type="text" id="pa-pub-nome" placeholder="Nome se Outros">
+                            </div>
+                            <div>
+                                <label for="pa-pub-url">Endereço Internet:</label>
+                                <input type="text" id="pa-pub-url" placeholder="https://doe.tce.sp.gov.br">
+                            </div>
+                            <button type="button" class="btn-add" style="font-size: 0.9em; padding: 8px 12px;" onclick="addParecerPublicacao()">
+                                + Adicionar Publicação
+                            </button>
+                            <div id="staging-parecer-publicacoes-list" class="staging-list-container">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" style="width: 100%; margin-top: 20px;" onclick="salvarParecerAta()">
+                            + Salvar Parecer/Ata na Lista
+                        </button>
+                    </fieldset>
+                    <h3>Pareceres/Atas Adicionados</h3>
+                    <div id="lista-pub-parecer" class="list-container"></div>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonPubParecer()">
+                        Gerar JSON (Publicações Parecer/Ata)
+                    </button>
+                </div>
+                
+                <div id="page-pub-rel-atividades" class="content-page">
+                    <h2>27. Publicação do Relatório de Atividades</h2>
+                    <fieldset>
+                        <legend>Status da Publicação</legend>
+                        <div>
+                            <label for="pra-houve">Houve Publicação no Exercício?</label>
+                            <select id="pra-houve" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                <option value="true">Sim</option>
+                                <option value="false" selected>Não</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Adicionar Publicação</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="pra-pub-tipo">Tipo Veículo Publicação:</label>
+                                <input type="number" id="pra-pub-tipo" placeholder="2">
+                            </div>
+                            <div>
+                                <label for="pra-pub-data">Data Publicação:</label>
+                                <input type="date" id="pra-pub-data">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="pra-pub-nome">Nome Veículo (se Outros):</label>
+                            <input type="text" id="pra-pub-nome" placeholder="Nome se Outros">
+                        </div>
+                        <div>
+                            <label for="pra-pub-url">Endereço Internet:</label>
+                            <input type="text" id="pra-pub-url" placeholder="https://doe.tce.sp.gov.br">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addPubRelAtividades()">+ Adicionar Publicação</button>
+                        <div id="lista-pub-rel-atividades" class="list-container"></div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonPubRelAtividades()">
+                        Gerar JSON (Publicação Rel. Atividades)
+                    </button>
+                </div>
+                
+                <div id="page-prestacao-contas" class="content-page">
+                    <h2>28. Prestação de Contas da Entidade Beneficiária</h2>
+                    <fieldset>
+                        <legend>Datas</legend>
+                        <div>
+                            <label for="pc-data-prestacao">Data da Prestação de Contas:</label>
+                            <input type="date" id="pc-data-prestacao">
+                        </div>
+                        <div>
+                            <label for="pc-data-ref-inicio">Período de Referência (Início):</label>
+                            <input type="date" id="pc-data-ref-inicio">
+                        </div>
+                        <div>
+                            <label for="pc-data-ref-final">Período de Referência (Final):</label>
+                            <input type="date" id="pc-data-ref-final">
+                        </div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonPrestacaoContas()">
+                        Gerar JSON (Prestação de Contas)
+                    </button>
+                </div>
+                
+                <div id="page-parecer" class="content-page">
+                    <h2>29. Parecer Conclusivo</h2>
+                    <fieldset>
+                        <legend>Dados do Parecer</legend>
+                        <div>
+                            <label for="pc-identificacao">Identificação do Parecer:</label>
+                            <input type="text" id="pc-identificacao" placeholder="0009/2024">
+                        </div>
+                        <div>
+                            <label for="pc-conclusao">Conclusão do Parecer (Tipo):</label>
+                            <input type="number" id="pc-conclusao" placeholder="1">
+                        </div>
+                        <div>
+                            <label for="pc-consideracoes">Considerações (Opcional):</label>
+                            <input type="text" id="pc-consideracoes" placeholder="Considerações do parecer conclusivo">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Adicionar Declaração ao Parecer</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="pc-decl-tipo">Tipo Declaração:</label>
+                                <input type="number" id="pc-decl-tipo" placeholder="1">
+                            </div>
+                            <div>
+                                <label for="pc-decl-declaracao">Declaração (Tipo):</label>
+                                <input type="number" id="pc-decl-declaracao" placeholder="1">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="pc-decl-justificativa">Justificativa (Opcional):</label>
+                            <input type="text" id="pc-decl-justificativa" placeholder="Justificativa se houver">
+                        </div>
+                        <button type="button" class="btn-add" onclick="addDeclaracaoParecer()">+ Adicionar Declaração</button>
+                        <div id="lista-declaracoes-parecer" class="list-container"></div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonParecerConclusivo()">
+                        Gerar JSON (Parecer Conclusivo)
+                    </button>
+                </div>
+                
+                <div id="page-transparencia" class="content-page">
+                    <h2>30. Transparência</h2>
+                    <fieldset>
+                        <legend>Sítio Internet</legend>
+                        <div>
+                            <label for="trans-mantem-sitio">Entidade Beneficiária mantém Sítio na Internet?</label>
+                            <select id="trans-mantem-sitio" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                <option value="true" selected>Sim</option>
+                                <option value="false">Não</option>
+                            </select>
+                        </div>
+                        <fieldset>
+                            <legend>Adicionar Sítio Internet (URL)</legend>
+                            <div class="form-row">
+                                <div style="flex-grow: 3;">
+                                    <label for="trans-sitio-url">URL do Sítio:</label>
+                                    <input type="text" id="trans-sitio-url" placeholder="https://transparencia.tce.sp.gov.br/">
+                                </div>
+                                <div>
+                                    <label>&nbsp;</label>
+                                    <button type="button" class="btn-add" style="width:100%;" onclick="addSitioInternet()">+ Adicionar URL</button>
+                                </div>
+                            </div>
+                            <div id="lista-sitios-internet" class="list-container"></div>
+                        </fieldset>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Requisitos Art. 7º/8º, § 1º</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="req-781-num">Requisito (Número):</label>
+                                <input type="number" id="req-781-num" placeholder="1">
+                            </div>
+                            <div>
+                                <label for="req-781-atende">Atende?</label>
+                                <select id="req-781-atende" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false">Não</option>
+                                </select>
+                            </div>
+                             <div style="flex-shrink: 1;">
+                                <label>&nbsp;</label>
+                                <button type="button" class="btn-add" style="width:100%;" onclick="addRequisitoArt78p1()">+ Adicionar</button>
+                            </div>
+                        </div>
+                        <div id="lista-requisitos-781" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Requisitos Sítio Art. 8º, § 3º</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="req-83-num">Requisito (Número):</label>
+                                <input type="number" id="req-83-num" placeholder="1">
+                            </div>
+                            <div>
+                                <label for="req-83-atende">Atende?</label>
+                                <select id="req-83-atende" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false">Não</option>
+                                </select>
+                            </div>
+                             <div style="flex-shrink: 1;">
+                                <label>&nbsp;</label>
+                                <button type="button" class="btn-add" style="width:100%;" onclick="addRequisitoArt8p3()">+ Adicionar</button>
+                            </div>
+                        </div>
+                        <div id="lista-requisitos-83" class="list-container"></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Requisitos Divulgação Informações</legend>
+                        <div class="form-row">
+                            <div>
+                                <label for="req-div-num">Requisito (Número):</label>
+                                <input type="number" id="req-div-num" placeholder="1">
+                            </div>
+                            <div>
+                                <label for="req-div-atende">Atende?</label>
+                                <select id="req-div-atende" class="form-control" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="true">Sim</option>
+                                    <option value="false">Não</option>
+                                </select>
+                            </div>
+                             <div style="flex-shrink: 1;">
+                                <label>&nbsp;</label>
+                                <button type="button" class="btn-add" style="width:100%;" onclick="addRequisitoDivulgacao()">+ Adicionar</button>
+                            </div>
+                        </div>
+                        <div id="lista-requisitos-divulgacao" class="list-container"></div>
+                    </fieldset>
+                    <button type="button" class="btn-generate-page" onclick="gerarJsonTransparencia()">
+                        Gerar JSON (Transparência)
+                    </button>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
