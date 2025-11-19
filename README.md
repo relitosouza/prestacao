@@ -1,7 +1,3 @@
-Aqui está um **README.md** profissional, organizado, bonito e cheio de **emojis**, pronto para usar no GitHub 👇
-
----
-
 # 🚀 Gerador e Validador de JSON — Sistema de Prestação de Contas
 
 Sistema web completo para **geração** e **validação** de JSONs relacionados à prestação de contas de contratos de gestão.
