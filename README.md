@@ -196,7 +196,7 @@ Abra uma *issue* contendo:
 
 ## 📞 Suporte
 
-* 📧 Email: **[seu-email@dominio.com](mailto:seu-email@dominio.com)**
+* 📧 Email: **[ricardo.elito@gmail.com](mailto:ricardo.elito@gmail.com)**
 * 🐙 Issues: **GitHub Issues**
 * 📘 Documentação: **Wiki do projeto**
 
@@ -204,8 +204,8 @@ Abra uma *issue* contendo:
 
 ## 👨‍💻 Autores
 
-* **Seu Nome** — Desenvolvimento inicial
-* GitHub: **SeuGitHub**
+* **Ricardo Souza** — Desenvolvimento inicial
+* GitHub: **https://github.com/relitosouza**
 
 ---
 
