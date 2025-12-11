@@ -168,8 +168,23 @@
             </ul>
             
             <div class="footer-bar">
+                <div class="draft-buttons">
+                    <button type="button" class="btn-save-draft" onclick="salvarDadosParciais()" title="Salva o preenchimento atual no navegador">
+                        💾 Salvar
+                    </button>
+                    <button type="button" class="btn-load-draft" onclick="recuperarDadosParciais()" title="Recupera o último salvamento">
+                        📂 Carregar
+                    </button>
+                </div>
+                
+                <button type="button" class="btn-clean-draft" onclick="limparRascunho()">
+                    🗑️ Limpar Rascunho
+                </button>
+                
+                <hr class="separator">
+
                 <button type="button" class="btn-submit-master" onclick="gerarJsonCompleto()">
-                    Gerar e Validar JSON Completo
+                    Gerar JSON Completo
                 </button>
             </div>
         </nav>
@@ -1948,7 +1963,7 @@
                                     <option value="true">Sim</option>
                                     <option value="false">Não</option>
                                 </select>
-                            </div>
+                            </div
                              <div style="flex-shrink: 1;">
                                 <label>&nbsp;</label>
                                 <button type="button" class="btn-add" style="width:100%;" onclick="addRequisitoDivulgacao()">+ Adicionar</button>
@@ -1967,4 +1982,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
