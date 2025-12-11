@@ -1762,3 +1762,142 @@ function downloadJson(conteudo, nomeDoArquivo) {
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#nav-geral").click();
 });
+// --- (ZZ) FUNÇÕES DE SALVAMENTO PARCIAL (RASCUNHO) ---
+
+const STORAGE_KEY = 'auditoria_dados_parciais';
+
+/**
+ * Salva o estado atual de todos os inputs e das listas dinâmicas.
+ */
+function salvarDadosParciais() {
+    try {
+        const estado = {
+            inputs: {},
+            listas: {}
+        };
+
+        // 1. Salvar valores de Inputs e Selects
+        // Pegamos todos os campos que possuem ID
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(el => {
+            if (el.id) {
+                // Checkbox e Radio usam 'checked', outros usam 'value'
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                    estado.inputs[el.id] = el.checked;
+                } else {
+                    estado.inputs[el.id] = el.value;
+                }
+            }
+        });
+
+        // 2. Salvar o HTML das Listas (Listas finais e Listas de Staging)
+        // Isso preserva os itens adicionados e os dados JSON atrelados (data-json)
+        const listas = document.querySelectorAll('.list-container, .staging-list-container');
+        listas.forEach(el => {
+            if (el.id) {
+                estado.listas[el.id] = el.innerHTML;
+            }
+        });
+
+        // 3. Salva no LocalStorage do navegador
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
+        
+        // Feedback visual simples
+        const btn = document.querySelector('.btn-save-draft');
+        const textoOriginal = btn.innerText;
+        btn.innerText = "Salvo! ✓";
+        setTimeout(() => { btn.innerText = textoOriginal; }, 2000);
+        
+    } catch (erro) {
+        console.error("Erro ao salvar rascunho:", erro);
+        alert("Não foi possível salvar. O armazenamento local pode estar cheio ou desabilitado.");
+    }
+}
+
+/**
+ * Recupera os dados salvos e preenche a página.
+ */
+function recuperarDadosParciais() {
+    const dadosJson = localStorage.getItem(STORAGE_KEY);
+    
+    if (!dadosJson) {
+        alert("Nenhum rascunho salvo encontrado.");
+        return;
+    }
+
+    if (!confirm("Isso substituirá os dados atuais pelos dados salvos anteriormente. Deseja continuar?")) {
+        return;
+    }
+
+    try {
+        const estado = JSON.parse(dadosJson);
+
+        // 1. Restaurar Inputs
+        Object.keys(estado.inputs).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                    el.checked = estado.inputs[id];
+                } else {
+                    el.value = estado.inputs[id];
+                }
+            }
+        });
+
+        // 2. Restaurar Listas
+        // Como suas funções de remover usam onclick="removerItem(this)" inline,
+        // restaurar o innerHTML funciona perfeitamente.
+        Object.keys(estado.listas).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.innerHTML = estado.listas[id];
+            }
+        });
+
+        alert("Dados recuperados com sucesso!");
+
+    } catch (erro) {
+        console.error("Erro ao recuperar rascunho:", erro);
+        alert("Erro ao processar o rascunho salvo.");
+    }
+}
+
+/**
+ * Limpa o rascunho salvo da memória.
+ */
+function limparRascunho() {
+    if(confirm("Tem certeza? Isso apagará o rascunho salvo na memória do navegador.")) {
+        localStorage.removeItem(STORAGE_KEY);
+        alert("Memória limpa.");
+    }
+}
+
+/**
+ * Função placeholder para o botão Mestre, caso ainda não tenha sido criada.
+ * Se você já criou uma função gerarJsonCompleto() personalizada, pode remover esta.
+ */
+if (typeof gerarJsonCompleto === 'undefined') {
+    window.gerarJsonCompleto = function() {
+        alert("Funcionalidade de Gerar JSON Completo ainda precisa ser implementada unificando as funções parciais.");
+    };
+}
+
+// Opcional: Auto-save a cada 60 segundos
+setInterval(() => {
+    // Salva silenciosamente sem feedback visual para não interromper
+    try {
+        const estado = { inputs: {}, listas: {} };
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(el => {
+            if (el.id) {
+                if (el.type === 'checkbox' || el.type === 'radio') estado.inputs[el.id] = el.checked;
+                else estado.inputs[el.id] = el.value;
+            }
+        });
+        const listas = document.querySelectorAll('.list-container, .staging-list-container');
+        listas.forEach(el => { if (el.id) estado.listas[el.id] = el.innerHTML; });
+        
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
+        console.log("Auto-save realizado.");
+    } catch(e) { console.warn("Falha no auto-save", e); }
+}, 60000);
