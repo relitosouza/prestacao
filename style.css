@@ -172,4 +172,68 @@ input[type="text"], input[type="number"], input[type="date"] {
     background: #f4f4f4;
     border-radius: 3px;
     margin-bottom: 5px;
+
+}
+/* --- ADICIONAR AO FINAL DO ARQUIVO style.css --- */
+
+/* Estilos para a área de Rascunho na Sidebar */
+.footer-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.draft-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-save-draft, .btn-load-draft {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.2s, transform 0.1s;
+    color: #fff;
+}
+
+.btn-save-draft {
+    background-color: #f39c12; /* Laranja */
+}
+.btn-save-draft:hover {
+    background-color: #d68910;
+}
+
+.btn-load-draft {
+    background-color: #17a2b8; /* Azul Turquesa */
+}
+.btn-load-draft:hover {
+    background-color: #138496;
+}
+
+.btn-clean-draft {
+    background-color: #e74c3c; /* Vermelho */
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.btn-clean-draft:hover {
+    background-color: #c0392b;
+}
+
+.separator {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
 }
