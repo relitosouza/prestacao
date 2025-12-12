@@ -1,5 +1,44 @@
 // --- (A) FUNÇÕES AUXILIARES GENÉRICAS ---
 
+// --- (B) LÓGICA DE NAVEGAÇÃO DO MENU ---
+
+function openPage(event, pageId) {
+    // Evita que o link recarregue a página ou suba para o topo
+    event.preventDefault();
+
+    // 1. Remove a classe 'active' de todas as páginas de conteúdo
+    const pages = document.querySelectorAll('.content-page');
+    pages.forEach(page => {
+        page.classList.remove('active');
+    });
+
+    // 2. Remove a classe 'active' de todos os links do menu
+    const links = document.querySelectorAll('.sidebar-menu a');
+    links.forEach(link => {
+        link.classList.remove('active');
+    });
+
+    // 3. Adiciona a classe 'active' na página que foi clicada (pelo ID)
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    } else {
+        console.error(`Página com ID "${pageId}" não encontrada!`);
+    }
+
+    // 4. Adiciona a classe 'active' no botão do menu que foi clicado
+    event.currentTarget.classList.add('active');
+}
+
+// Inicia a primeira página como ativa automaticamente ao carregar
+document.addEventListener("DOMContentLoaded", function() {
+    // Simula um clique no primeiro link para abrir a página inicial
+    const firstLink = document.querySelector("#nav-geral");
+    if (firstLink) {
+        firstLink.click();
+    }
+});
+
 // Remove um item de qualquer lista (botão "Remover")
 function removerItem(buttonElement) {
     buttonElement.parentElement.remove();
@@ -2063,4 +2102,5 @@ function gerarJsonCompleto() {
         // --- 21. Declarações ---
         jsonCompleto.declaracoes = {
             "houve_contratacao_empres
+
 
