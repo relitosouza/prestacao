@@ -1901,3 +1901,166 @@ setInterval(() => {
         console.log("Auto-save realizado.");
     } catch(e) { console.warn("Falha no auto-save", e); }
 }, 60000);
+// --- (ZZ) FUNÇÃO MESTRE: GERAR JSON COMPLETO ---
+
+function gerarJsonCompleto() {
+    try {
+        // Objeto principal que conterá todos os dados
+        const jsonCompleto = {};
+
+        // --- 1. Geral ---
+        jsonCompleto.descritor = {
+            tipo_documento: document.getElementById('tipo_documento').value,
+            municipio: parseInt(document.getElementById('municipio').value) || null,
+            entidade: parseInt(document.getElementById('entidade').value) || null,
+            ano: parseInt(document.getElementById('ano').value) || null,
+            mes: parseInt(document.getElementById('mes').value) || null
+        };
+        jsonCompleto.codigo_ajuste = document.getElementById('codigo_ajuste').value;
+
+        // --- 2. Empregados ---
+        jsonCompleto.relacao_empregados = [];
+        document.querySelectorAll('#lista-empregados .list-item').forEach(item => {
+            jsonCompleto.relacao_empregados.push(JSON.parse(item.dataset.json));
+        });
+
+        // --- 3. Bens ---
+        jsonCompleto.relacao_bens = {
+            "relacao_bens_moveis_adquiridos": [],
+            "relacao_bens_moveis_cedidos": [],
+            "relacao_bens_moveis_baixados_devolvidos": [],
+            "relacao_bens_imoveis_adquiridos": [],
+            "relacao_bens_imoveis_cedidos": [],
+            "relacao_bens_imoveis_baixados_devolvidos": []
+        };
+        // Função auxiliar local para popular listas de bens
+        const pushList = (idLista, arrayDestino) => {
+            document.querySelectorAll(`#${idLista} .list-item`).forEach(item => {
+                arrayDestino.push(JSON.parse(item.dataset.json));
+            });
+        };
+        pushList('lista-bens-moveis-adquiridos', jsonCompleto.relacao_bens.relacao_bens_moveis_adquiridos);
+        pushList('lista-bens-moveis-cedidos', jsonCompleto.relacao_bens.relacao_bens_moveis_cedidos);
+        pushList('lista-bens-moveis-baixados', jsonCompleto.relacao_bens.relacao_bens_moveis_baixados_devolvidos);
+        pushList('lista-bens-imoveis-adquiridos', jsonCompleto.relacao_bens.relacao_bens_imoveis_adquiridos);
+        pushList('lista-bens-imoveis-cedidos', jsonCompleto.relacao_bens.relacao_bens_imoveis_cedidos);
+        pushList('lista-bens-imoveis-baixados', jsonCompleto.relacao_bens.relacao_bens_imoveis_baixados_devolvidos);
+
+        // --- 4. Contratos ---
+        jsonCompleto.contratos = [];
+        document.querySelectorAll('#lista-contratos .list-item').forEach(item => {
+            jsonCompleto.contratos.push(JSON.parse(item.dataset.json));
+        });
+
+        // --- 5. Documentos Fiscais ---
+        jsonCompleto.documentos_fiscais = [];
+        document.querySelectorAll('#lista-docfiscais .list-item').forEach(item => {
+            jsonCompleto.documentos_fiscais.push(JSON.parse(item.dataset.json));
+        });
+
+        // --- 6. Pagamentos ---
+        jsonCompleto.pagamentos = [];
+        document.querySelectorAll('#lista-pagamentos .list-item').forEach(item => {
+            jsonCompleto.pagamentos.push(JSON.parse(item.dataset.json));
+        });
+
+        // --- 7. Disponibilidades ---
+        jsonCompleto.disponibilidades = {
+            "saldos": [],
+            "saldo_fundo_fixo": parseFloat(document.getElementById('disp-fundo-fixo').value) || 0
+        };
+        document.querySelectorAll('#lista-saldos .list-item').forEach(item => {
+            jsonCompleto.disponibilidades.saldos.push(JSON.parse(item.dataset.json));
+        });
+
+        // --- 8. Receitas ---
+        jsonCompleto.receitas = {
+            "receitas_aplic_financ_repasses_publicos_municipais": parseFloat(document.getElementById('rec-aplic-municipais').value) || 0,
+            "receitas_aplic_financ_repasses_publicos_estaduais": parseFloat(document.getElementById('rec-aplic-estaduais').value) || 0,
+            "receitas_aplic_financ_repasses_publicos_federais": parseFloat(document.getElementById('rec-aplic-federais').value) || 0,
+            "repasses_recebidos": [],
+            "outras_receitas": [],
+            "recursos_proprios": []
+        };
+        pushList('lista-repasses-recebidos', jsonCompleto.receitas.repasses_recebidos);
+        pushList('lista-outras-receitas', jsonCompleto.receitas.outras_receitas);
+        pushList('lista-recursos-proprios', jsonCompleto.receitas.recursos_proprios);
+
+        // --- 9. Ajustes de Saldo ---
+        jsonCompleto.ajustes_saldo = {
+            "retificacao_repasses": [],
+            "inclusao_repasses": [],
+            "retificacao_pagamentos": [],
+            "inclusao_pagamentos": []
+        };
+        pushList('lista-retificacao-repasses', jsonCompleto.ajustes_saldo.retificacao_repasses);
+        pushList('lista-inclusao-repasses', jsonCompleto.ajustes_saldo.inclusao_repasses);
+        pushList('lista-retificacao-pagamentos', jsonCompleto.ajustes_saldo.retificacao_pagamentos);
+        pushList('lista-inclusao-pagamentos', jsonCompleto.ajustes_saldo.inclusao_pagamentos);
+
+        // --- 10. Servidores Cedidos ---
+        jsonCompleto.servidores_cedidos = [];
+        pushList('lista-servidores-cedidos', jsonCompleto.servidores_cedidos);
+
+        // --- 11. Descontos ---
+        jsonCompleto.descontos = [];
+        pushList('lista-descontos', jsonCompleto.descontos);
+
+        // --- 12. Devoluções ---
+        jsonCompleto.devolucoes = [];
+        pushList('lista-devolucoes', jsonCompleto.devolucoes);
+
+        // --- 13. Glosas ---
+        jsonCompleto.glosas = [];
+        pushList('lista-glosas', jsonCompleto.glosas);
+
+        // --- 14. Empenhos ---
+        jsonCompleto.empenhos = [];
+        pushList('lista-empenhos', jsonCompleto.empenhos);
+
+        // --- 15. Repasses ---
+        jsonCompleto.repasses = [];
+        pushList('lista-repasses', jsonCompleto.repasses);
+
+        // --- 16. Relatório Atividades ---
+        jsonCompleto.relatorio_atividades = { "programas": [] };
+        pushList('lista-programas', jsonCompleto.relatorio_atividades.programas);
+
+        // --- 17. Dados Gerais Entidade ---
+        jsonCompleto.dados_gerais_entidade_beneficiaria = {
+            "identificacao_certidao_dados_gerais": document.getElementById('certidao-dados-gerais').value,
+            "identificacao_certidao_corpo_diretivo": document.getElementById('certidao-corpo-diretivo').value,
+            "identificacao_certidao_membros_conselho": document.getElementById('certidao-membros-conselho').value,
+            "identificacao_certidao_responsaveis": document.getElementById('certidao-responsaveis-entidade').value
+        };
+
+        // --- 18. Responsáveis Órgão ---
+        jsonCompleto.responsaveis_membros_orgao_concessor = {
+            "identificacao_certidao_responsaveis": document.getElementById('certidao-responsaveis-concessor').value,
+            "identificacao_certidao_membros_comissao_avaliacao": document.getElementById('certidao-membros-comissao').value,
+            "identificacao_certidao_membros_controle_interno": document.getElementById('certidao-membros-controle').value
+        };
+
+        // --- 19. Publicação Regulamento ---
+        jsonCompleto.publicacao_regulamento_compras = {
+            "houve_publicacao_inicial": (document.getElementById('pub-inicial-houve').value === 'true'),
+            "publicacoes_regulamento_inicial": [],
+            "houve_alteracao_do_regulamento": (document.getElementById('pub-alteracao-houve').value === 'true'),
+            "houve_publicacao_regulamento_alterado": (document.getElementById('pub-alteracao-publicada').value === 'true'),
+            "publicacoes_alteracao_regulamento": []
+        };
+        pushList('lista-pub-inicial', jsonCompleto.publicacao_regulamento_compras.publicacoes_regulamento_inicial);
+        pushList('lista-pub-alteracao', jsonCompleto.publicacao_regulamento_compras.publicacoes_alteracao_regulamento);
+
+        // --- 20. Publicação Extrato ---
+        jsonCompleto.publicacao_extrato_execucao_fisica_financeira = {
+            "ha_extrato_execucao_fisica_financeira": (document.getElementById('extrato-ha').value === 'true'),
+            "extrato_elaborado_conforme_modelo": (document.getElementById('extrato-conforme').value === 'true'),
+            "publicacoes": []
+        };
+        pushList('lista-pub-extrato', jsonCompleto.publicacao_extrato_execucao_fisica_financeira.publicacoes);
+
+        // --- 21. Declarações ---
+        jsonCompleto.declaracoes = {
+            "houve_contratacao_empres
+
