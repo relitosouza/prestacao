@@ -8,11 +8,12 @@ Focado em produtividade, simplicidade e alto nível de conformidade técnica. �
 ## ✨ Funcionalidades
 
 * 📚 **30 seções organizadas** cobrindo todos os aspectos da prestação de contas
-* 📱 **Interface responsiva** com navegação lateral intuitiva
+* 💾 **Salvamento Automático (LocalStorage)**: Seus dados persistem mesmo se fechar o navegador
+* 📌 **Salvar Parciais**: Grave o progresso de seções individuais para continuar depois
+* 🧩 **Exportação Modular**: Gere o JSON de apenas uma seção específica ou o pacote completo
 * ⚡ **Validação em tempo real** usando Ajv JSON Schema Validator
-* 🎨 **Design moderno** e compatível com dispositivos móveis
+* 📱 **Interface responsiva** com navegação lateral intuitiva
 * 🔌 **Funcionalidade offline completa**
-* 🧩 **Geração individual ou completa de JSONs**
 
 ---
 
@@ -35,8 +36,9 @@ Abra o arquivo **index.html** no navegador de sua preferência.
 
 * Navegue pelas seções usando o **menu lateral**
 * Preencha os formulários conforme solicitado
+* **Salve seu progresso** localmente a qualquer momento (o sistema recupera os dados ao recarregar)
 * Utilize os botões **"+ Adicionar"** para incluir múltiplos itens
-* Gere JSONs **individuais** ou **completos**
+* Gere JSONs **parciais (por seção)** para validações rápidas ou o **arquivo completo** ao finalizar
 
 ---
 
@@ -101,6 +103,11 @@ gerador-json-prestacao-contas/
 
 ## ⚙️ Recursos Técnicos
 
+### 💾 Persistência e Dados (Novo)
+
+* **LocalStorage**: Implementado para garantir que os dados preenchidos não sejam perdidos ao atualizar a página ou fechar o navegador.
+* **Gestão de Estado**: Controle individual do estado de cada formulário (Parciais).
+
 ### 📝 Campos de Formulário
 
 * Texto, número, data, select
@@ -108,6 +115,10 @@ gerador-json-prestacao-contas/
 * Adição múltipla de itens
 * Visualização em lista
 
+### 🧱 Geração de JSON
+
+* 🔹 **Parcial/Individual**: Botão específico em cada seção para exportar apenas aquele contexto.
+* 🔹 **Completo**: Compilação de todas as seções e parciais salvas em um único arquivo final.
 ### 🧱 Geração de JSON
 
 * 🔹 **Individual**: botão “Gerar JSON” por seção
